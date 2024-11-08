@@ -65,7 +65,7 @@ class MainTest {
         burger.setContents("Lettuce, Tomato, Vegan Patty, Avocado");
 
 
-        assertEquals(1L, burger.getId());
+        assertEquals(1, burger.getId());
         assertEquals("Vegan Delight", burger.getName());
         assertEquals(8.99, burger.getPrice());
         assertEquals(true, burger.getIsVegan());
@@ -105,7 +105,7 @@ class MainTest {
         burger.setId(1L);
         when(entityManager.find(Burger.class, 1L)).thenReturn(burger);
         Burger found = burgerDao.findById(1L);
-        assertEquals(1L, found.getId());
+        assertEquals(1, found.getId());
     }
 
     @Test
@@ -120,7 +120,7 @@ class MainTest {
         burger.setId(1L);
         when(entityManager.merge(burger)).thenReturn(burger);
         Burger updated = burgerDao.update(burger);
-        assertEquals(1L, updated.getId());
+        assertEquals(1, updated.getId());
     }
 
     @Test
@@ -130,7 +130,7 @@ class MainTest {
         when(entityManager.find(Burger.class, 1L)).thenReturn(burger);
         doNothing().when(entityManager).remove(burger);
         Burger removed = burgerDao.remove(1L);
-        assertEquals(1L, removed.getId());
+        assertEquals(1, removed.getId());
     }
 
     @Test
@@ -138,7 +138,7 @@ class MainTest {
         TypedQuery<Burger> query = mock(TypedQuery.class);
         when(entityManager.createQuery(anyString(), eq(Burger.class))).thenReturn(query);
         when(query.getResultList()).thenReturn(Arrays.asList(new Burger(), new Burger()));
-        List<Burger> burgers = burgerDao.findByPrice(10);
+        List<Burger> burgers = burgerDao.findByPrice(10.0);
         assertEquals(2, burgers.size());
     }
 
